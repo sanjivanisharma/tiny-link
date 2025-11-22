@@ -1,5 +1,30 @@
 const pool = require('./pool');
 
+async function createUser({ uuid, username, password }) {
+    try {
+        const query = `
+        INSERT INTO users (uuid, username, password) 
+        VALUES ($1, $2, $3) 
+        RETURNING *`;
+        const { rows } = await pool.query(query, [uuid, username, password]);
+        return rows[0];
+    } catch (error) {
+        console.error('Error creating user:', error);
+        throw error;
+    }
+}
+
+async function getUserByUsername({username, password}) {
+    try {
+        const query = 'SELECT * FROM users WHERE username = $1 and password = $2';
+        const { rows } = await pool.query(query, [username, password]);
+        return rows[0];
+    } catch (error) {
+        console.error('Invalid username or password:', error);
+        throw error;
+    }
+}
+
 async function getAllLinks(user_id) {
     try {
         const query = 'SELECT * FROM links WHERE user_id = $1 ORDER BY created_at DESC';
@@ -62,6 +87,8 @@ async function incrementClick(code) {
 }
 
 module.exports = {
+    createUser,
+    getUserByUsername,
     getAllLinks,
     getLinkByCode,
     createLink,
