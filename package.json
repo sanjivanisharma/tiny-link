@@ -1,0 +1,25 @@
+{
+  "name": "tiny-link",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjivanisharma/tiny-link.git"
+  },
+  "author": "Sanjivani Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjivanisharma/tiny-link/issues"
+  },
+  "homepage": "https://github.com/sanjivanisharma/tiny-link#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
