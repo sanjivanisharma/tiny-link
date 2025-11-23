@@ -19,6 +19,16 @@ function generateCode() {
   return code
 }
 
+function convertTimestampToDateString(links) {
+    return links.map(link => {
+        return {
+            ...link,
+            timestamp: new Date(Number(link.timestamp)).toDateString()
+        };
+    });
+}
+
+
 // Controllers for link management
 
 
@@ -30,7 +40,8 @@ async function getLinks(req, res) {
     if(links.length === 0) {
         return res.status(404).json({ message: 'No links found' });
     }
-    return res.status(200).json(links);
+    const convertedTimestampLinks = convertTimestampToDateString(links);
+    return res.status(200).render('dashboard', { links: convertedTimestampLinks });
 }
 
 
@@ -84,7 +95,7 @@ async function redirectLink(req, res) {
     const { code } = req.params;
     const link = await db.getLinkByCode(code);
     if (!link) {
-        return res.status(404).json({ message: 'Link not found' });
+        return res.status(404).send(`<h1>404 Not Found</h1><p>The requested URL ${req.originalUrl} was not found on this server.</p>`);
     }
     await db.incrementClick(code);
     return res.status(302).redirect(link.target_url);
