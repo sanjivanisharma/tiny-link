@@ -67,6 +67,7 @@ Returns:
 │
 ├── .env.example
 └── README.md
+```
 
 ## Installation & Setup
 
