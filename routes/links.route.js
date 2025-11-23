@@ -1,5 +1,5 @@
 const express = require('express');
-const { getLinks, createLink, deleteLink, redirectLink, getLinkByCode } = require('../controllers/linksController');
+const { getLinks, createLink, deleteLink, getLinkByCode } = require('../controllers/links.controller');
 const router = express.Router();
 
 router.get('/', getLinks);

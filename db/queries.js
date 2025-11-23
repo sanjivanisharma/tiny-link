@@ -1,5 +1,10 @@
 const pool = require('./pool');
 
+// Database query functions
+
+
+// Create a new user
+
 async function createUser({ uuid, username, password }) {
     try {
         const query = `
@@ -14,7 +19,10 @@ async function createUser({ uuid, username, password }) {
     }
 }
 
-async function getUserByUsername({username, password}) {
+
+// User login
+
+async function loginUser({username, password}) {
     try {
         const query = 'SELECT * FROM users WHERE username = $1 and password = $2';
         const { rows } = await pool.query(query, [username, password]);
@@ -24,6 +32,9 @@ async function getUserByUsername({username, password}) {
         throw error;
     }
 }
+
+
+// Get all links for a user
 
 async function getAllLinks(user_id) {
     try {
@@ -36,6 +47,9 @@ async function getAllLinks(user_id) {
     }
 }
 
+
+// Get a link by code
+
 async function getLinkByCode(code) {
     try {
         const query = 'SELECT * FROM links WHERE code = $1';
@@ -46,6 +60,9 @@ async function getLinkByCode(code) {
         throw error;
     }
 }
+
+
+// Create a new link
 
 async function createLink({code, target_url, user_id}) {
     try {
@@ -61,6 +78,9 @@ async function createLink({code, target_url, user_id}) {
     }
 }
 
+
+// Delete a link
+
 async function deleteLink(code) {
     try {
         const query = 'DELETE FROM links WHERE code = $1';
@@ -71,6 +91,9 @@ async function deleteLink(code) {
         throw error;
     }
 }
+
+
+// Increment click count and last accessed timestamp
 
 async function incrementClick(code) {
     try {
@@ -86,9 +109,11 @@ async function incrementClick(code) {
     }
 }
 
+
+
 module.exports = {
     createUser,
-    getUserByUsername,
+    loginUser,
     getAllLinks,
     getLinkByCode,
     createLink,

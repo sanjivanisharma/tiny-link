@@ -19,6 +19,11 @@ function generateCode() {
   return code
 }
 
+// Controllers for link management
+
+
+// Get all links for a user
+
 async function getLinks(req, res) { 
     const user_id = req.body.user_id;
     const links = await db.getAllLinks(user_id);
@@ -28,6 +33,9 @@ async function getLinks(req, res) {
     return res.status(200).json(links);
 }
 
+
+// Get a link by its code
+
 async function getLinkByCode(req, res) {
     const { code } = req.params;
     const link = await db.getLinkByCode(code);
@@ -36,6 +44,9 @@ async function getLinkByCode(req, res) {
     }
     return res.status(200).json(link);
 }
+
+
+// Create a new link
 
 async function createLink(req, res) { 
     const { code, target_url, user_id } = req.body;
@@ -54,6 +65,9 @@ async function createLink(req, res) {
     return res.status(201).json(newLink);
 }
 
+
+// Delete a link
+
 async function deleteLink(req, res) {
     const { code } = req.params;
     const rowCount = await db.deleteLink(code);
@@ -62,6 +76,9 @@ async function deleteLink(req, res) {
     }
     return res.status(200).json({ message: 'Link deleted successfully' });
 }
+
+
+// Redirect to the target URL
 
 async function redirectLink(req, res) {
     const { code } = req.params;
@@ -72,6 +89,7 @@ async function redirectLink(req, res) {
     await db.incrementClick(code);
     return res.status(302).redirect(link.target_url);
 }
+
 
 module.exports = {
     getLinks,

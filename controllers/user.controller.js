@@ -1,6 +1,12 @@
 const {v4} = require('uuid');
 const db = require('../db/queries');
 
+
+// Controllers for user management
+
+
+// Create a new user
+
 async function createUser(req, res) {
     const { username, password } = req.body;
     const uuid = v4();
@@ -11,16 +17,20 @@ async function createUser(req, res) {
     res.status(201).json(newUser);
 }
 
-async function getUserByUsername(req, res) {
+
+// User login
+
+async function loginUser(req, res) {
     const { username, password } = req.body;
-    const user = await db.getUserByUsername({username, password});
+    const user = await db.loginUser({username, password});
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
     res.json(user);
 }
 
+
 module.exports = {
     createUser,
-    getUserByUsername
+    loginUser
 }

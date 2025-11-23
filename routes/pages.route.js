@@ -1,5 +1,5 @@
 const express = require('express');
-const { redirectLink, getLinkByCode } = require('../controllers/linksController');
+const { redirectLink } = require('../controllers/links.controller');
 const router = express.Router();
 
 router.get('/:code', redirectLink);

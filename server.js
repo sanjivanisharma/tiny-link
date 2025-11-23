@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const linksRouter = require('./routes/links');
-const pagesRouter = require('./routes/pages');
-const userRouter = require('./routes/user');
+const linksRouter = require('./routes/links.route');
+const pagesRouter = require('./routes/pages.route');
+const userRouter = require('./routes/user.route');
 
 app.use(express.json());
 
