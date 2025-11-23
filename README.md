@@ -43,7 +43,7 @@ It allows users to shorten URLs, track click statistics, and manage links.
 Returns:
 ```json
 { "ok": true, "version": "1.0" }
-
+```
 
 ## Project Structure
 
@@ -67,6 +67,7 @@ Returns:
 │
 ├── .env.example
 └── README.md
+```
 
 ## Installation & Setup
 
